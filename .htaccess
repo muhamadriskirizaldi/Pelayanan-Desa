@@ -1,0 +1,41 @@
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
+
+    RewriteEngine On
+
+    # 1. Blokir akses langsung ke file sensitif (.env, .git, composer.json, dll)
+    <FilesMatch "(^\.|\.env|composer\.(json|lock)|package\.(json|lock)|artisan|phpunit\.xml)">
+        <IfModule mod_authz_core.c>
+            Require all denied
+        </IfModule>
+        <IfModule !mod_authz_core.c>
+            Order allow,deny
+            Deny from all
+        </IfModule>
+    </FilesMatch>
+
+    # 2. Blokir akses ke direktori internal Laravel
+    RewriteRule ^(app|bootstrap|config|database|resources|routes|storage|tests|vendor)(/.*)?$ - [F,L]
+
+    # Bersihkan titik di akhir URL (misal akibat copy-paste tautan di akhir kalimat: /register.)
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^(.*)\.+$ $1 [L,R=301]
+
+    # 3. Cari berkas statis di folder public jika ada
+    RewriteCond %{DOCUMENT_ROOT}/$0 -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -f
+    RewriteRule ^ - [L]
+
+    RewriteCond %{REQUEST_URI} !^/public/
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{DOCUMENT_ROOT}/pelayanan\ desa/public/$1 -f
+    RewriteRule ^(.*)$ public/$1 [L]
+
+    # 4. Arahkan semua request non-file ke Front Controller index.php
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^ index.php [L]
+</IfModule>

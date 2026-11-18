@@ -4,13 +4,20 @@ Aplikasi web pelayanan administrasi desa dengan fokus proses pengajuan dan pener
 1. Identitas Mahasiswa dan Proyek
 Lengkapi bagian berikut sebelum repositori dikumpulkan.
 Informasi	Keterangan
+
 Nama Mahasiswa	Muhamad Riski Rizaldi
+
 NIM	41257123
+
 Kelas	1B
+
 Kelompok	DEVLYN
+
 Mata Kuliah	Rekayasa Perangkat Lunak
+
 Dosen Pengampu	Yudhistira Arie Wijaya, M.Kom., CDS.
-Tema Topik Kelompok	Pelayanan Publik Desa Berbasis Web dengan Dukungan Kecerdasan Artifisial (AI)
+
+Tema Pelayanan Publik Desa Berbasis Web dengan Dukungan Kecerdasan Artifisial (AI)
 Nama Aplikasi	SIPELDES — Sistem Informasi Pelayanan Desa
 
 
